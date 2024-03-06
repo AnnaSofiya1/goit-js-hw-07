@@ -1,28 +1,22 @@
-const loginForm = document.querySelector('.login-form');
+const fillForm = document.querySelector(".login-form");
+const formData = {};
+const checkForm = (event) =>{
+    event.preventDefault();
+    const form = event.target;
 
-const labelEl = document.querySelectorAll('label');
-labelEl.forEach(element => element.classList.add('login-form-label'));
-
-const inputEl = document.querySelectorAll('input');
-inputEl.forEach(element => element.classList.add('login-form-input'));
-
-const buttonEl = document.querySelector('button');
-buttonEl.classList.add("btn")
-
-
-loginForm.addEventListener("submit", handleSubmit)
-function handleSubmit(event) {
-  event.preventDefault();
-  const form = event.target;
-  const email = form.elements.email.value.trim();
-  const password = form.elements.password.value.trim();
-  if (email === '' || password === '') {
-     alert (`All form fields must be filled in`);
-  }
-  const formData = {
-    email: email,
-    password: password,
-  }
-  console.log(formData)
-  event.currentTarget.reset()
+    const chkEmail = form.elements.email.value.trim();   
+    const chkPwd = form.elements.password.value.trim(); 
+   
+    if (chkEmail.length < 1 || chkPwd.length < 1 ) {
+      alert('All form fields must be filled in');
+    }else{
+      formData.password = chkPwd;
+      formData.email = chkEmail;  
+      console.log(formData);     
+      fillForm.reset();
+      
+    }  
+    
 }
+
+fillForm.addEventListener("submit", checkForm);
